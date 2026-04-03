@@ -56,8 +56,7 @@ public class Movimiento : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.angularVelocity = Vector3.zero;
-            anim.SetTrigger("Jump"); 
-            
+            anim.SetTrigger("Jump");
         }
     }
 
@@ -70,7 +69,7 @@ public class Movimiento : MonoBehaviour
 
     public void ApplyJumpForce()
     {
-     rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
     void OnDrawGizmos()
