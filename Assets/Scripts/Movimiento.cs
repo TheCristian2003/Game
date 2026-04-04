@@ -44,11 +44,11 @@ public class Movimiento : MonoBehaviour
         Vector3 movement  = new Vector3(h, 0f, v) * moveSpeed;
         rb.linearVelocity = new Vector3(movement.x, rb.linearVelocity.y, movement.z);
 
-        //if (movement.magnitude > 0.1f && v >= 0f)
-        //{
-        //    Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
-        //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
-        //}
+        if (movement.magnitude > 0.1f && v >= 0f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
+        }
     }
 
     void Jump()
