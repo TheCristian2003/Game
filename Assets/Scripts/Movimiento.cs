@@ -1,10 +1,15 @@
 using UnityEngine;
+using System.Collections;
 
 public class Movimiento : MonoBehaviour
 {
     [Header("Movimiento")]
     public float moveSpeed  = 5f;
     public float jumpForce  = 8f;
+
+    [Header("Boost")]
+    public float speedBoost = 2f;
+    public float jumpBoost = 3f;
 
     [Header("Deteccion de Suelo")]
     public float     groundCheckDistance;
@@ -85,4 +90,28 @@ public class Movimiento : MonoBehaviour
             anim.SetTrigger("Attack");
         }
     }
+
+    IEnumerator BoostTemporal()
+    {
+        moveSpeed += speedBoost;
+        jumpForce += jumpBoost;
+
+        yield return new WaitForSeconds(5f);
+
+        moveSpeed -= speedBoost;
+        jumpForce -= jumpBoost;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PowerUp"))
+        {
+            Debug.Log("PowerUp recogido!");
+
+            StartCoroutine(BoostTemporal());
+
+            Destroy(other.gameObject);
+        }
+    }
 }
+
