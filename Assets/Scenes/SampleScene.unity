@@ -129,11 +129,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 47a9193bd14c5894980ccdf83669db4a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.33
+      value: -3.34
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 47a9193bd14c5894980ccdf83669db4a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.03
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 47a9193bd14c5894980ccdf83669db4a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -223,7 +223,7 @@ CapsuleCollider:
   m_Radius: 0.31957006
   m_Height: 2.081263
   m_Direction: 1
-  m_Center: {x: 0, y: 0.7849643, z: 0.020675838}
+  m_Center: {x: 0, y: 1.04, z: 0.020675838}
 --- !u!54 &152069979
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -271,6 +271,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  cameraTransform: {fileID: 330585546}
+--- !u!4 &152069982 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 47a9193bd14c5894980ccdf83669db4a, type: 3}
+  m_PrefabInstance: {fileID: 152069976}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +289,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -408,6 +415,23 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b43da5e5a58d041af861ca800fa89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraController
+  target: {fileID: 152069982}
+  distance: 5
+  mouseSensitivity: 200
+  minY: -30
+  maxY: 60
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

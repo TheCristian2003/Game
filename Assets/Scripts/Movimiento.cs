@@ -14,7 +14,7 @@ public class Movimiento : MonoBehaviour
     [Header("Deteccion de Suelo")]
     public float     groundCheckDistance;
     public LayerMask groundLayer;
-
+    public Transform cameraTransform;
     Rigidbody rb;
     Animator  anim;
     private  bool    isGrounded;
@@ -46,12 +46,27 @@ public class Movimiento : MonoBehaviour
 
     void Move()
     {
-        Vector3 movement  = new Vector3(h, 0f, v) * moveSpeed;
-        rb.linearVelocity = new Vector3(movement.x, rb.linearVelocity.y, movement.z);
+        // Dirección relativa a la cámara
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
 
-        if (movement.magnitude > 0.1f && v >= 0f)
+        // Evitar que se incline hacia arriba/abajo
+        forward.y = 0f;
+        right.y = 0f;
+
+        forward.Normalize();
+        right.Normalize();
+
+        Vector3 movement = forward * v + right * h;
+
+        // Movimiento
+        Vector3 velocity = movement * moveSpeed;
+        rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
+
+        // Rotación hacia donde se mueve
+        if (movement.magnitude > 0.1f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10f * Time.deltaTime);
         }
     }
